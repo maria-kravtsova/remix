@@ -1,0 +1,17 @@
+name: Code checker
+on: [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Getting files from GitHub
+        uses: actions/checkout@v1
+
+      - name: Rubocop checks
+        uses: andrewmcodes/rubocop-linter-action@v2.0.0
+        with:
+          additional_gems: 'rubocop-rails rubocop-performance'
+          fail_level: 'warning'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
